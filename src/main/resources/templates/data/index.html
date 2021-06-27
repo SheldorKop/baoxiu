@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+            integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+            integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+            crossorigin="anonymous"></script>
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script >
+
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-2 col-md-2"></div>
+        <div class="col-xs-8 col-md-8">
+            <div th:replace="/pub/header"></div>
+            <div class="btn-group">
+                <form action="/data/upload" method="post" enctype="multipart/form-data">
+                    学期：
+                    <select name="termId">
+                        <option th:text="${term.schoolyearstart+'-'+term.schoolyearend+'-'+term.schoolterm}" th:value="${term.id}" th:each="term : ${terms}"></option>
+                    </select>
+                    上传资料：
+                    <input  type="file" accept="application/vnd.ms-excel,application/msword,application/pdf,image/jpeg" name="file" />
+                    <button type="submit" class="btn btn-default" >上传</button>
+                </form>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>老师名称</th>
+                    <th>原始文件名称</th>
+                    <th>上传文件名称</th>
+                    <th>上传时间</th>
+                    <th>审核状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="data : ${datas}">
+                    <td th:text="${data.teacherName}"></td>
+                    <td th:text="${data.fileNameUp}"></td>
+                    <td th:text="${data.fileNameLib}"></td>
+                    <td th:text="${data.upTime}"></td>
+                    <td th:text="${data.ensure}"></td>
+                    <td><form action="/data/delete">
+                        <input type="hidden" name="fileNameLib" th:value="${data.fileNameLib}"/>
+                        <button type="submit" class="btn btn-info" >删除</button></form></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-2 col-md-2"></div>
+    </div>
+</div>
+</body>
+</html>

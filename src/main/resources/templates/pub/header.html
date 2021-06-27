@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="span8">
+            <ul class="nav nav-pills">
+                <li><a href="/baoxiu">保修信息</a></li>
+                <li><a href="/user/logout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div style="text-align: center">
+    当前登录用户：<span th:text="${session.user.getUsername()}"></span>
+</div>

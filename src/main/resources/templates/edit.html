@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <!-- Material Design for Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+          integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+            integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+            integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-2 col-md-2"></div>
+        <div class="col-xs-8 col-md-8">
+            <div th:replace="/pub/header"></div>
+            <form role="form" action="/baoxiu/edit" method="post">
+                <input type="hidden" name="id" th:value="${baoxiu.id}"/>
+                <input type="hidden" name="userId" th:value="${baoxiu.userId}"/>
+                <div class="form-group">
+                    <label for="name">报修人</label>
+                    <input type="text" class="form-control" th:value="${baoxiu.name}" name="name" id="name"
+                           placeholder="name">
+                </div>
+                <div class="form-group">
+                    <label for="content">报修内容</label>
+                    <input type="text" class="form-control" th:value="${baoxiu.content}" name="content" id="content"
+                           placeholder="content">
+                </div>
+                <div class="form-group">
+                    <label for="location">报修位置</label>
+                    <input type="text" class="form-control" th:value="${baoxiu.location}" name="location" id="location"
+                           placeholder="location">
+                </div>
+                <div th:if="${session.user.getRole().equals('admin')}" class="form-group">
+                    <label for="feedback">保修反馈</label>
+                    <input type="text" class="form-control" th:value="${baoxiu.feedback}" name="feedback" id="feedback"
+                           placeholder="feedback">
+                </div>
+                <button type="submit" class="btn btn-default">提交</button>
+            </form>
+        </div>
+        <div class="col-xs-2 col-md-2"></div>
+    </div>
+</div>
+</body>
+</html>
